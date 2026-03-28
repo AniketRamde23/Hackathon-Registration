@@ -1,0 +1,93 @@
+.container {
+  min-height: 100vh;
+  width: 100vw;
+  background-color: #0B0F19;
+  color: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  font-family: system-ui, -apple-system, sans-serif;
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 99999; /* Force overlap above any broken NextJS layouts */
+}
+.card {
+  background: rgba(25, 30, 45, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 3rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 1);
+  width: 100%;
+  max-width: 450px;
+  text-align: center;
+}
+.title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  margin: 0 0 0.5rem 0;
+  color: #ffffff;
+  letter-spacing: 2px;
+}
+.subtitle {
+  color: #22D3EE;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  margin-bottom: 2rem;
+}
+.inputWrapper {
+  text-align: left;
+  margin-bottom: 2rem;
+}
+.label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #9CA3AF;
+  margin-bottom: 0.5rem;
+}
+.input {
+  width: 100%;
+  padding: 1rem 1rem 1rem 1rem;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.75rem;
+  color: white;
+  font-size: 1rem;
+  box-sizing: border-box;
+  outline: none;
+}
+.input:focus {
+  border-color: #22D3EE;
+}
+.otpInput {
+  text-align: center;
+  font-family: monospace;
+  font-size: 1.5rem;
+  letter-spacing: 0.5em;
+}
+.button {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(to right, #003B73, #1D809F);
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.errorBox {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #F87171;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
