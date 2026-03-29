@@ -17,7 +17,12 @@ export const sendRegistrationConfirmationEmail = async (user: any, registrationI
   return true;
 }
 
-export const sendPaymentSuccessEmail = async (user: any, ticket: any, qrCodeUrl: string, team: any) => {
+export const sendCancellationEmail = async (user: any, registrationId: string, expiresAt: any) => {
+  console.log(`Cron Daemon: Dispatched logical Cancellation Email template for ${user.email} dropping at ${expiresAt}`);
+  return true;
+}
+
+export const sendPaymentSuccessEmail = async (user: any, ticket: any, qrCodeUrl: string, team?: any) => {
   
   const teamMembersHtml = team && team.memberDetails && team.memberDetails.length > 0 
     ? team.memberDetails.map((m: any, i: number) => `

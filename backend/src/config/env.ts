@@ -11,18 +11,13 @@ dotenv.config({ path: path.resolve(process.cwd(), '.env') });
 // potentially adding default values or other common validations.
 // For this change, we'll interpret them as direct Zod types with the specified options.
 const str = (options?: { default?: string; devDefault?: string }) => {
-  let schema = z.string();
-  if (options?.default !== undefined) {
-    schema = schema.default(options.default);
-  }
-  // For devDefault, we'd typically check NODE_ENV, but for a direct replacement,
-  // we'll just use the default if provided. If devDefault is meant to override default
-  // only in development, more complex logic would be needed here.
-  // For now, we'll prioritize devDefault if present, otherwise default.
   if (options?.devDefault !== undefined) {
-    schema = schema.default(options.devDefault);
+    return z.string().default(options.devDefault);
   }
-  return schema;
+  if (options?.default !== undefined) {
+    return z.string().default(options.default);
+  }
+  return z.string();
 };
 
 const num = (options?: { default?: number }) => {
