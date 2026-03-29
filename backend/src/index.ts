@@ -38,7 +38,10 @@ const httpServer = createServer(app);
 
 // ── SOCKET.IO ─────────────────────────────────────────
 const io = new SocketServer(httpServer, {
-  cors: { origin: [config.FRONTEND_URL, config.ADMIN_URL, config.JUDGE_URL], credentials: true },
+  cors: { 
+    origin: (origin, callback) => callback(null, origin || true),
+    credentials: true,
+  },
 });
 initSocket(io);
 app.set('io', io);
@@ -48,7 +51,19 @@ app.use(helmet({
   contentSecurityPolicy: false,
   crossOriginResourcePolicy: { policy: 'cross-origin' },
 }));
-app.use(cors({ origin: [config.FRONTEND_URL, config.ADMIN_URL, config.JUDGE_URL], credentials: true }));
+
+// Dynamic CORS configuration accepting any Vercel domain to prevent preview-url hard-blocks
+app.use(cors({ 
+  origin: (origin: string | undefined, callback) => {
+    if (!origin || origin.endsWith('.vercel.app') || origin.startsWith('http://localhost:')) {
+      return callback(null, true);
+    }
+    const allowed = [config.FRONTEND_URL, config.ADMIN_URL, config.JUDGE_URL];
+    if (allowed.includes(origin)) return callback(null, true);
+    return callback(null, false);
+  },
+  credentials: true 
+}));
 app.use(express.json({ limit: '20kb' })); // Lock payload sizes
 app.use(cookieParser());
 
